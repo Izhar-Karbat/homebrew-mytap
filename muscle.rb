@@ -15,8 +15,8 @@ class Muscle < Formula
     ENV.append_to_cflags "-I#{libomp.opt_include}"
     ENV.append "LDFLAGS", "-L#{libomp.opt_lib} -lomp"
 
-    # Compile using Clang instead of GCC
-    inreplace "src/Makefile", "CXX := g++", "CXX := #{ENV.cxx}"
+    # Compile using the default Clang++ compiler
+    inreplace "src/Makefile", "CXX := g++", "CXX := clang++"
 
     # Remove the -static flag from the Makefile
     inreplace "src/Makefile", "-static", ""
