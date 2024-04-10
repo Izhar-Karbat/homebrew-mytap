@@ -7,6 +7,8 @@ class Muscle < Formula
 
   depends_on "libomp"
 
+  patch :DATA
+
   def install
     ENV.cxx11
     libomp = Formula["libomp"]
@@ -14,9 +16,6 @@ class Muscle < Formula
     # Point to the libomp headers and library
     ENV.append_to_cflags "-I#{libomp.opt_include}"
     ENV.append "LDFLAGS", "-L#{libomp.opt_lib} -lomp"
-
-    # Compile using the default Clang++ compiler
-    inreplace "src/Makefile", "CXX := g++", "CXX := clang++"
 
     # Remove the -static flag from the Makefile
     inreplace "src/Makefile", "-static", ""
@@ -32,3 +31,16 @@ class Muscle < Formula
     assert_match version.to_s, shell_output("#{bin}/muscle -version")
   end
 end
+
+__END__
+diff --git a/src/Makefile b/src/Makefile
+index 7272a6f..41ce7c5 100644
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -39,7 +39,7 @@ ifeq ($(OS),Linux)
+ endif
+ 
+ ifeq ($(OS),Darwin)
+-       CXX := clang++-11
++       CXX := clang++
+ endif
