@@ -2,7 +2,7 @@ class Muscle < Formula
   desc "Multiple sequence alignment tool"
   homepage "https://github.com/rcedgar/muscle"
   url "https://github.com/rcedgar/muscle/archive/refs/tags/v5.1.tar.gz"
-  sha256 "2fe55db73ff4e3e1cb6429a7a365e4546f333200a2bb8d32f21e4cce833b92a8"
+  sha256 "sha256 "091d9f8733b92ff106c2a8eb274d1e5a57960d397a2068d8638d6002e8880dab""
   license "GPL-3.0-only"
 
   depends_on "libomp"
